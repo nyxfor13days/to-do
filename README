@@ -1,0 +1,7 @@
+A Todo App
+
+This is a todo app created using React Native and Expo to learn Expo.
+
+Features
+- Async Splash Screen Loading
+- Add, modify and delete todo items

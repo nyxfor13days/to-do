@@ -5,16 +5,21 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import colors from "./assets/config/colors";
 import { useCallback } from "react";
+import Header from "./components/Header";
+import Todo from "./components/Todo";
+import AddTodo from "./components/Todo/AddTodo";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function App() {
+const App = () => {
   const [fontsLoaded] = useFonts({
     JetBrainsMono: require("./assets/fonts/JetBrainsMono-Variable.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
+      // Artificial Delay
+      // await new Promise((resolve) => setTimeout(resolve, 2000));
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
@@ -26,31 +31,20 @@ export default function App() {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <SafeAreaView>
-        <View style={styles.header}>
-          <Text style={styles.title}>today's task</Text>
-        </View>
+        <Header />
+        <Todo />
       </SafeAreaView>
+      <AddTodo />
       <StatusBar style="auto" />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
   },
-
-  header: {
-    paddingHorizontal: 20,
-    height: 124,
-    justifyContent: "center",
-  },
-
-  title: {
-    color: colors.onBackground,
-    fontSize: 36,
-    fontFamily: "JetBrainsMono",
-    letterSpacing: -1.5,
-  },
 });
+
+export default App;
